@@ -38,6 +38,31 @@ class Response:
         self.status = status
         self.description = document["description"]
 
+class ModelDefinition:
+    def __init__(self, name, document):
+        self.name = name
+        self.properties = [ModelProperty(name, data) for name, data in document["properties"].iteritems()]
+
+class ModelProperty:
+    def __init__(self, name, document):
+        self.name = name
+        if document.has_key("$ref"):
+            self.dref = document["$ref"]
+        else:
+            self.type = document["type"]
+            if document.has_key("format"):
+                self.format = document["format"]
+            else:
+                self.format = None
+            if document.has_key("description"):
+                self.description = document["description"]
+            else:
+                self.description = ""
+            if document.has_key("nullable"):
+                self.nullable = document["nullable"]
+            else:
+                self.nullable = False
+
 # Load yaml structure
 with open("sample.yml") as file:
     document = yaml.load(file)
@@ -74,3 +99,22 @@ for endpoint in endpoints:
             print "\t\t\t\tDescription: " + response.description
 
 
+# Parse model objects definition
+definitions = document["definitions"]
+models = []
+for name, model_dict in definitions.iteritems():
+    models.append(ModelDefinition(name, model_dict))
+
+for model in models:
+    print "Model: " + model.name
+    print "\tProperties: "
+    for property in model.properties:
+        print "\t\tName: " + property.name
+        if hasattr(property, "dref"):
+            print "\t\t\t$ref: " + property.dref
+        else:
+            print "\t\t\tType: " + property.type
+            print "\t\t\tNullable: " + str(property.nullable)
+            if property.format != None:
+                print "\t\t\tFormat: " + property.format
+            
