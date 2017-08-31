@@ -14,7 +14,10 @@ class EndpointMethod:
     def __init__(self, method, document):
         self.method = method
         self.summary = document["summary"]
-        self.parameters = [Parameter(x) for x in document["parameters"]]
+        if document.has_key("parameters"):
+            self.parameters = [Parameter(x) for x in document["parameters"]]
+        else:
+            self.parameters = []
         self.responses = [Response(status, document["responses"][status]) for status in document["responses"].keys()]
 
 class Parameter:
@@ -25,7 +28,10 @@ class Parameter:
             self.description = document["description"]
         else:
             self.description = ""
-        self.required = document["required"]
+        if document.has_key("required"):
+            self.required = document["required"]
+        else:
+            self.required = False
         # self.schema = document["schema"]
         if document.has_key("type"):
             self.type = document["type"]
@@ -40,8 +46,19 @@ class Response:
 
 class ModelDefinition:
     def __init__(self, name, document):
+        print name
         self.name = name
-        self.properties = [ModelProperty(name, data) for name, data in document["properties"].iteritems()]
+        self.type = document["type"]
+        if self.type == "array":
+            self.items_dref = document["items"]["$ref"]
+            self.properties = []
+        elif self.type == "object":
+            self.items_dref = ""
+            self.properties = [ModelProperty(name, data) for name, data in document["properties"].iteritems()]
+        elif self.type == "string":
+            self.items_dref = ""
+            self.properties = []
+            # do nothing
 
 class ModelProperty:
     def __init__(self, name, document):
@@ -66,11 +83,6 @@ class ModelProperty:
 # Load yaml structure
 with open("sample.yml") as file:
     document = yaml.load(file)
-
-# Display server information
-host = document["host"]
-basePath = document["basePath"]
-print "Base: " + host + basePath
 
 # Parse endpoints information
 paths = document["paths"]
@@ -109,7 +121,7 @@ for model in models:
     print "Model: " + model.name
     print "\tProperties: "
     for property in model.properties:
-        print "\t\tName: " + property.name
+        print "\t\tName: " + str(property.name)
         if hasattr(property, "dref"):
             print "\t\t\t$ref: " + property.dref
         else:
