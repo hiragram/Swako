@@ -20,7 +20,7 @@ $ sudo easy_install pip
 ### Install pyyaml
 
 ```sh
-$ sudo pip install pyyaml
+$  /usr/bin/env python2.7 -m pip install pyyaml
 ```
 
 http://maku77.github.io/python/io/yaml.html
