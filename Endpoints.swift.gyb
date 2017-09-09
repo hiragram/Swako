@@ -9,16 +9,34 @@ endpoints = parse.parseEndpoints("sample.yml")
 //
 
 public struct Endpoints {
-% for endpoint in endpoints:
+
+    % for endpoint in endpoints:
     public struct ????? {
-        static let path = "${endpoint.path}"
         % for method in endpoint.methods:
-        public struct ${method.method} {
+        public struct ${swift.makePascalCase(method.method)} {
+            var path: String {
+                return "${endpoint.path}"
+            }
+
+            % params = ", ".join([parameter.name + ": " + swift.typeNameFromParameter(parameter) for parameter in method.parameters])
+            public init(${params}) {
+                % for parameter in method.parameters:
+                self.${parameter.name} = ${parameter.name}
+                % end
+            }
+
             % for parameter in method.parameters:
             private let ${parameter.name}: ${swift.typeNameFromParameter(parameter)}
             % end
+            
+            var parameters: [String: Any] {
+                % for parameter in method.parameters:
+                "${parameter.name}": ${parameter.name},
+                % end
+            }
         }
         % end
     }
-% end
+    
+    % end
 }

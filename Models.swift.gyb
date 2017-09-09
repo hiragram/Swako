@@ -19,7 +19,7 @@ def descriptionComment(text):
 // ${model.name}
 public struct ${model.name} {
 % for property in model.properties:
-  public var ${property.name}: ${swift.typeName(property)} ${descriptionComment(property.description)}
+  public var ${property.name}: ${swift.typeNameFromProperty(property)} ${descriptionComment(property.description)}
 % end
 }
 
