@@ -49,6 +49,10 @@ class Parameter:
         else:
             self.type = None
         # self.format = document["format"]
+        if document.has_key("nullable"):
+            self.nullable = document.has_key["nullable"]
+        else:
+            self.nullable = False
 
 class Response:
     def __init__(self, status, document):

@@ -10,13 +10,18 @@ def typeNameFromProperty(property):
         return "Array<" + elementName + ">"
 
 def typeNameFromParameter(parameter):
-    primitive = typeNameString(parameter.type)
-
+    typeName = ""
+    
     if parameter.type == "array":
         elementName = typeNameString(parameter.itemType)
-        return "Array<" + elementName + ">"
+        typeName = "Array<" + elementName + ">"
+    else:
+        typeName = typeNameString(parameter.type)
 
-    return primitive
+    if parameter.nullable:
+        typeName += "?"
+
+    return typeName
 
 def typeNameString(typeName):
     if typeName == "integer":
