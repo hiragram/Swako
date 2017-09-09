@@ -12,8 +12,9 @@ def typeNameFromProperty(property):
 def typeNameFromParameter(parameter):
     primitive = typeNameString(parameter.type)
 
-    if primitive == None:
-        return "???????????????"
+    if parameter.type == "array":
+        elementName = typeNameString(parameter.itemType)
+        return "Array<" + elementName + ">"
 
     return primitive
 
@@ -31,9 +32,15 @@ def typeNameString(typeName):
     elif typeName == None:
         return None
     else:
-        print(typeName)
         m = re.search(r"#/definitions/(.*)", typeName)
         return m.group(1)
+
+def endpointTypeName(endpoint):
+    pathComponents = endpoint.path.split("/")
+
+    words = [pathComponent[0].upper() + pathComponent[1:] for pathComponent in pathComponents if pathComponent != ""]
+
+    return "_".join(words)
 
 def makeCamelCase(snakeCaseString):
     return re.sub("_(.)",lambda x:x.group(1).upper(), snakeCaseString)

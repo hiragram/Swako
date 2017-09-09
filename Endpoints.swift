@@ -4,43 +4,43 @@
 
 public struct Endpoints {
 
-    public struct ????? {
+    public struct User_CreateWithArray {
         public struct Post {
             var path: String {
                 return "/user/createWithArray"
             }
 
-            public init(body: ???????????????) {
+            public init(body: Array<User>) {
                 self.body = body
             }
 
-            private let body: ???????????????
+            private let body: Array<User>
             
             var parameters: [String: Any] {
                 "body": body,
             }
         }
     }
-    
-    public struct ????? {
+
+    public struct Store_Order {
         public struct Post {
             var path: String {
                 return "/store/order"
             }
 
-            public init(body: ???????????????) {
+            public init(body: Order) {
                 self.body = body
             }
 
-            private let body: ???????????????
+            private let body: Order
             
             var parameters: [String: Any] {
                 "body": body,
             }
         }
     }
-    
-    public struct ????? {
+
+    public struct Pet_{petId} {
         public struct Post {
             var path: String {
                 return "/pet/{petId}"
@@ -96,18 +96,18 @@ public struct Endpoints {
             }
         }
     }
-    
-    public struct ????? {
+
+    public struct Pet {
         public struct Put {
             var path: String {
                 return "/pet"
             }
 
-            public init(body: ???????????????) {
+            public init(body: Pet) {
                 self.body = body
             }
 
-            private let body: ???????????????
+            private let body: Pet
             
             var parameters: [String: Any] {
                 "body": body,
@@ -118,19 +118,19 @@ public struct Endpoints {
                 return "/pet"
             }
 
-            public init(body: ???????????????) {
+            public init(body: Pet) {
                 self.body = body
             }
 
-            private let body: ???????????????
+            private let body: Pet
             
             var parameters: [String: Any] {
                 "body": body,
             }
         }
     }
-    
-    public struct ????? {
+
+    public struct Store_Inventory {
         public struct Get {
             var path: String {
                 return "/store/inventory"
@@ -144,20 +144,20 @@ public struct Endpoints {
             }
         }
     }
-    
-    public struct ????? {
+
+    public struct User_{username} {
         public struct Put {
             var path: String {
                 return "/user/{username}"
             }
 
-            public init(username: String, body: ???????????????) {
+            public init(username: String, body: User) {
                 self.username = username
                 self.body = body
             }
 
             private let username: String
-            private let body: ???????????????
+            private let body: User
             
             var parameters: [String: Any] {
                 "username": username,
@@ -195,8 +195,8 @@ public struct Endpoints {
             }
         }
     }
-    
-    public struct ????? {
+
+    public struct User_Login {
         public struct Get {
             var path: String {
                 return "/user/login"
@@ -216,8 +216,8 @@ public struct Endpoints {
             }
         }
     }
-    
-    public struct ????? {
+
+    public struct Store_Order_{orderId} {
         public struct Get {
             var path: String {
                 return "/store/order/{orderId}"
@@ -249,26 +249,26 @@ public struct Endpoints {
             }
         }
     }
-    
-    public struct ????? {
+
+    public struct Pet_FindByStatus {
         public struct Get {
             var path: String {
                 return "/pet/findByStatus"
             }
 
-            public init(status: ???????????????) {
+            public init(status: Array<String>) {
                 self.status = status
             }
 
-            private let status: ???????????????
+            private let status: Array<String>
             
             var parameters: [String: Any] {
                 "status": status,
             }
         }
     }
-    
-    public struct ????? {
+
+    public struct User_Logout {
         public struct Get {
             var path: String {
                 return "/user/logout"
@@ -282,44 +282,44 @@ public struct Endpoints {
             }
         }
     }
-    
-    public struct ????? {
+
+    public struct User_CreateWithList {
         public struct Post {
             var path: String {
                 return "/user/createWithList"
             }
 
-            public init(body: ???????????????) {
+            public init(body: Array<User>) {
                 self.body = body
             }
 
-            private let body: ???????????????
+            private let body: Array<User>
             
             var parameters: [String: Any] {
                 "body": body,
             }
         }
     }
-    
-    public struct ????? {
+
+    public struct User {
         public struct Post {
             var path: String {
                 return "/user"
             }
 
-            public init(body: ???????????????) {
+            public init(body: User) {
                 self.body = body
             }
 
-            private let body: ???????????????
+            private let body: User
             
             var parameters: [String: Any] {
                 "body": body,
             }
         }
     }
-    
-    public struct ????? {
+
+    public struct Pet_{petId}_UploadImage {
         public struct Post {
             var path: String {
                 return "/pet/{petId}/uploadImage"
@@ -342,23 +342,23 @@ public struct Endpoints {
             }
         }
     }
-    
-    public struct ????? {
+
+    public struct Pet_FindByTags {
         public struct Get {
             var path: String {
                 return "/pet/findByTags"
             }
 
-            public init(tags: ???????????????) {
+            public init(tags: Array<String>) {
                 self.tags = tags
             }
 
-            private let tags: ???????????????
+            private let tags: Array<String>
             
             var parameters: [String: Any] {
                 "tags": tags,
             }
         }
     }
-    
+
 }

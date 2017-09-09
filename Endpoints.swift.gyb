@@ -11,8 +11,10 @@ endpoints = parse.parseEndpoints("sample.yml")
 public struct Endpoints {
 
     % for endpoint in endpoints:
-    public struct ????? {
+    % print ("Generating endpoint definition for " + endpoint.path)
+    public struct ${swift.endpointTypeName(endpoint)} {
         % for method in endpoint.methods:
+        % print ("\tmethod: " + method.method)
         public struct ${swift.makePascalCase(method.method)} {
             var path: String {
                 return "${endpoint.path}"
@@ -37,6 +39,6 @@ public struct Endpoints {
         }
         % end
     }
-    
+
     % end
 }

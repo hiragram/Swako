@@ -32,9 +32,20 @@ class Parameter:
             self.required = document["required"]
         else:
             self.required = False
-        # self.schema = document["schema"]
         if document.has_key("type"):
             self.type = document["type"]
+            if document.has_key("items"):
+                if document["items"].has_key("type"):
+                    self.itemType = document["items"]["type"]
+        elif document.has_key("schema"):
+            if document["schema"].has_key("$ref"):
+                self.type = document["schema"]["$ref"]
+            else:
+                self.type = document["schema"]["type"]
+                if document["schema"]["items"].has_key("$ref"):
+                    self.itemType = document["schema"]["items"]["$ref"]
+                elif document["schema"]["items"].has_key("type"):
+                    self.itemType = document["schema"]["items"]["type"]
         else:
             self.type = None
         # self.format = document["format"]
