@@ -14,6 +14,7 @@ class EndpointMethod:
     def __init__(self, method, document):
         self.method = method
         self.summary = document["summary"]
+        self.description = document["description"]
         if document.has_key("parameters"):
             self.parameters = [Parameter(x) for x in document["parameters"]]
         else:

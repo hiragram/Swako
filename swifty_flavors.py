@@ -72,3 +72,9 @@ def makePascalCase(snakeCaseString):
 
 def pathToPropertyInterpolation(path):
     return path.replace("{", "\(").replace("}", ")")
+
+def descriptionComment(text):
+    if text == "":
+        return ""
+    else:
+        return "// " + text

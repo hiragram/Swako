@@ -5,6 +5,9 @@
 public struct Endpoints {
 
     public struct User_CreateWithArray {
+
+        // Creates list of users with given input array
+        //
         public struct Post {
             typealias Response = Void
 
@@ -12,7 +15,7 @@ public struct Endpoints {
                 return "/user/createWithArray"
             }
 
-            private let body: [User]
+            private let body: [User] // List of user object
 
             public init(body: [User]) {
                 self.body = body
@@ -27,6 +30,9 @@ public struct Endpoints {
     }
 
     public struct Store_Order {
+
+        // Place an order for a pet
+        //
         public struct Post {
             typealias Response = Order
 
@@ -34,7 +40,7 @@ public struct Endpoints {
                 return "/store/order"
             }
 
-            private let body: Order
+            private let body: Order // order placed for purchasing the pet
 
             public init(body: Order) {
                 self.body = body
@@ -49,6 +55,9 @@ public struct Endpoints {
     }
 
     public struct Pet_PetId {
+
+        // Updates a pet in the store with form data
+        //
         public struct Post {
             typealias Response = Void
 
@@ -56,9 +65,9 @@ public struct Endpoints {
                 return "/pet/\(petId)"
             }
 
-            private let petId: Int
-            private let name: String
-            private let status: String
+            private let petId: Int // ID of pet that needs to be updated
+            private let name: String // Updated name of the pet
+            private let status: String // Updated status of the pet
 
             public init(petId: Int, name: String, status: String) {
                 self.petId = petId
@@ -74,6 +83,9 @@ public struct Endpoints {
                 ]
             }
         }
+        // Find pet by ID
+        //
+        // Returns a single pet
         public struct Get {
             typealias Response = Pet
 
@@ -81,7 +93,7 @@ public struct Endpoints {
                 return "/pet/\(petId)"
             }
 
-            private let petId: Int
+            private let petId: Int // ID of pet to return
 
             public init(petId: Int) {
                 self.petId = petId
@@ -93,6 +105,8 @@ public struct Endpoints {
                 ]
             }
         }
+        // Deletes a pet
+        //
         public struct Delete {
             typealias Response = Void
 
@@ -100,8 +114,8 @@ public struct Endpoints {
                 return "/pet/\(petId)"
             }
 
-            private let api_key: String
-            private let petId: Int
+            private let api_key: String 
+            private let petId: Int // Pet id to delete
 
             public init(api_key: String, petId: Int) {
                 self.api_key = api_key
@@ -118,6 +132,9 @@ public struct Endpoints {
     }
 
     public struct Pet {
+
+        // Update an existing pet
+        //
         public struct Put {
             typealias Response = Void
 
@@ -125,7 +142,7 @@ public struct Endpoints {
                 return "/pet"
             }
 
-            private let body: Pet
+            private let body: Pet // Pet object that needs to be added to the store
 
             public init(body: Pet) {
                 self.body = body
@@ -137,6 +154,8 @@ public struct Endpoints {
                 ]
             }
         }
+        // Add a new pet to the store
+        //
         public struct Post {
             typealias Response = Void
 
@@ -144,7 +163,7 @@ public struct Endpoints {
                 return "/pet"
             }
 
-            private let body: Pet
+            private let body: Pet // Pet object that needs to be added to the store
 
             public init(body: Pet) {
                 self.body = body
@@ -159,6 +178,10 @@ public struct Endpoints {
     }
 
     public struct Store_Inventory {
+
+        // Returns pet inventories by status
+        //
+        // Returns a map of status codes to quantities
         public struct Get {
             typealias Response = Void
 
@@ -177,6 +200,10 @@ public struct Endpoints {
     }
 
     public struct User_Username {
+
+        // Updated user
+        //
+        // This can only be done by the logged in user.
         public struct Put {
             typealias Response = Void
 
@@ -184,8 +211,8 @@ public struct Endpoints {
                 return "/user/\(username)"
             }
 
-            private let username: String
-            private let body: User
+            private let username: String // name that need to be updated
+            private let body: User // Updated user object
 
             public init(username: String, body: User) {
                 self.username = username
@@ -199,6 +226,8 @@ public struct Endpoints {
                 ]
             }
         }
+        // Get user by user name
+        //
         public struct Get {
             typealias Response = User
 
@@ -206,7 +235,7 @@ public struct Endpoints {
                 return "/user/\(username)"
             }
 
-            private let username: String
+            private let username: String // The name that needs to be fetched. Use user1 for testing. 
 
             public init(username: String) {
                 self.username = username
@@ -218,6 +247,9 @@ public struct Endpoints {
                 ]
             }
         }
+        // Delete user
+        //
+        // This can only be done by the logged in user.
         public struct Delete {
             typealias Response = Void
 
@@ -225,7 +257,7 @@ public struct Endpoints {
                 return "/user/\(username)"
             }
 
-            private let username: String
+            private let username: String // The name that needs to be deleted
 
             public init(username: String) {
                 self.username = username
@@ -240,6 +272,9 @@ public struct Endpoints {
     }
 
     public struct User_Login {
+
+        // Logs user into the system
+        //
         public struct Get {
             typealias Response = Void
 
@@ -247,8 +282,8 @@ public struct Endpoints {
                 return "/user/login"
             }
 
-            private let username: String
-            private let password: String
+            private let username: String // The user name for login
+            private let password: String // The password for login in clear text
 
             public init(username: String, password: String) {
                 self.username = username
@@ -265,6 +300,10 @@ public struct Endpoints {
     }
 
     public struct Store_Order_OrderId {
+
+        // Find purchase order by ID
+        //
+        // For valid response try integer IDs with value >= 1 and <= 10.         Other values will generated exceptions
         public struct Get {
             typealias Response = Order
 
@@ -272,7 +311,7 @@ public struct Endpoints {
                 return "/store/order/\(orderId)"
             }
 
-            private let orderId: Int
+            private let orderId: Int // ID of pet that needs to be fetched
 
             public init(orderId: Int) {
                 self.orderId = orderId
@@ -284,6 +323,9 @@ public struct Endpoints {
                 ]
             }
         }
+        // Delete purchase order by ID
+        //
+        // For valid response try integer IDs with positive integer value.         Negative or non-integer values will generate API errors
         public struct Delete {
             typealias Response = Void
 
@@ -291,7 +333,7 @@ public struct Endpoints {
                 return "/store/order/\(orderId)"
             }
 
-            private let orderId: Int
+            private let orderId: Int // ID of the order that needs to be deleted
 
             public init(orderId: Int) {
                 self.orderId = orderId
@@ -306,6 +348,10 @@ public struct Endpoints {
     }
 
     public struct Pet_FindByStatus {
+
+        // Finds Pets by status
+        //
+        // Multiple status values can be provided with comma separated strings
         public struct Get {
             typealias Response = Array<Pet>
 
@@ -313,7 +359,7 @@ public struct Endpoints {
                 return "/pet/findByStatus"
             }
 
-            private let status: [String]
+            private let status: [String] // Status values that need to be considered for filter
 
             public init(status: [String]) {
                 self.status = status
@@ -328,6 +374,9 @@ public struct Endpoints {
     }
 
     public struct User_Logout {
+
+        // Logs out current logged in user session
+        //
         public struct Get {
             typealias Response = Void
 
@@ -346,6 +395,9 @@ public struct Endpoints {
     }
 
     public struct User_CreateWithList {
+
+        // Creates list of users with given input array
+        //
         public struct Post {
             typealias Response = Void
 
@@ -353,7 +405,7 @@ public struct Endpoints {
                 return "/user/createWithList"
             }
 
-            private let body: [User]
+            private let body: [User] // List of user object
 
             public init(body: [User]) {
                 self.body = body
@@ -368,6 +420,10 @@ public struct Endpoints {
     }
 
     public struct User {
+
+        // Create user
+        //
+        // This can only be done by the logged in user.
         public struct Post {
             typealias Response = Void
 
@@ -375,7 +431,7 @@ public struct Endpoints {
                 return "/user"
             }
 
-            private let body: User
+            private let body: User // Created user object
 
             public init(body: User) {
                 self.body = body
@@ -390,6 +446,9 @@ public struct Endpoints {
     }
 
     public struct Pet_PetId_UploadImage {
+
+        // uploads an image
+        //
         public struct Post {
             typealias Response = ApiResponse
 
@@ -397,9 +456,9 @@ public struct Endpoints {
                 return "/pet/\(petId)/uploadImage"
             }
 
-            private let petId: Int
-            private let additionalMetadata: String
-            private let file: File is not supported
+            private let petId: Int // ID of pet to update
+            private let additionalMetadata: String // Additional data to pass to server
+            private let file: File is not supported // file to upload
 
             public init(petId: Int, additionalMetadata: String, file: File is not supported) {
                 self.petId = petId
@@ -418,6 +477,10 @@ public struct Endpoints {
     }
 
     public struct Pet_FindByTags {
+
+        // Finds Pets by tags
+        //
+        // Muliple tags can be provided with comma separated strings. Use         tag1, tag2, tag3 for testing.
         public struct Get {
             typealias Response = Array<Pet>
 
@@ -425,7 +488,7 @@ public struct Endpoints {
                 return "/pet/findByTags"
             }
 
-            private let tags: [String]
+            private let tags: [String] // Tags to filter by
 
             public init(tags: [String]) {
                 self.tags = tags
