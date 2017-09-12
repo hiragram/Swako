@@ -16,6 +16,9 @@ public struct Endpoints {
         % for method in endpoint.methods:
         % print ("\tmethod: " + method.method)
         public struct ${swift.makePascalCase(method.method)} {
+            % print (endpoint.path)
+            typealias Response = ${swift.typeNameFromResponse(method.response)}
+
             var path: String {
                 return "${endpoint.path}"
             }

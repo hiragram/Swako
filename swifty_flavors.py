@@ -23,6 +23,22 @@ def typeNameFromParameter(parameter):
 
     return typeName
 
+def typeNameFromResponse(response):
+    if response == None:
+        return "Void"
+    elif hasattr(response, "type") == False:
+        return "Void"
+
+    typeName = ""
+    
+    if response.type == "array":
+        elementName = typeNameString(response.itemType)
+        typeName = "Array<" + elementName + ">"
+    else:
+        typeName = typeNameString(response.type)
+
+    return typeName  
+
 def typeNameString(typeName):
     if typeName == "integer":
         return "Int"

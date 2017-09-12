@@ -18,7 +18,16 @@ class EndpointMethod:
             self.parameters = [Parameter(x) for x in document["parameters"]]
         else:
             self.parameters = []
-        self.responses = [Response(status, document["responses"][status]) for status in document["responses"].keys()]
+
+        successResponse = None
+        if document["responses"].has_key(200):
+            successResponse = document["responses"][200]
+        elif document["responses"].has_key("default"):
+            successResponse = document["responses"]["default"]
+        if successResponse != None:
+            self.response = Response(successResponse)
+        else:
+            self.response = None
 
 class Parameter:
     def __init__(self, document):
@@ -55,9 +64,21 @@ class Parameter:
             self.nullable = False
 
 class Response:
-    def __init__(self, status, document):
-        self.status = status
+    def __init__(self, document):
         self.description = document["description"]
+        if document.has_key("schema"):
+            if document["schema"].has_key("$ref"):
+                self.type = document["schema"]["$ref"]
+            elif document["schema"].has_key("items"):
+                self.type = document["schema"]["type"]
+                if document["schema"]["items"].has_key("$ref"):
+                    self.itemType = document["schema"]["items"]["$ref"]
+                elif document["schema"]["items"].has_key("type"):
+                    self.itemType = document["schema"]["items"]["type"]
+                else:
+                    self.itemType = None
+        else:
+            return None
 
 class ModelDefinition:
     def __init__(self, name, document):

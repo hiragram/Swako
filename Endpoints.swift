@@ -6,6 +6,8 @@ public struct Endpoints {
 
     public struct User_CreateWithArray {
         public struct Post {
+            typealias Response = Void
+
             var path: String {
                 return "/user/createWithArray"
             }
@@ -24,6 +26,8 @@ public struct Endpoints {
 
     public struct Store_Order {
         public struct Post {
+            typealias Response = Order
+
             var path: String {
                 return "/store/order"
             }
@@ -42,6 +46,8 @@ public struct Endpoints {
 
     public struct Pet_{petId} {
         public struct Post {
+            typealias Response = Void
+
             var path: String {
                 return "/pet/{petId}"
             }
@@ -63,6 +69,8 @@ public struct Endpoints {
             }
         }
         public struct Get {
+            typealias Response = Pet
+
             var path: String {
                 return "/pet/{petId}"
             }
@@ -78,6 +86,8 @@ public struct Endpoints {
             }
         }
         public struct Delete {
+            typealias Response = Void
+
             var path: String {
                 return "/pet/{petId}"
             }
@@ -99,6 +109,8 @@ public struct Endpoints {
 
     public struct Pet {
         public struct Put {
+            typealias Response = Void
+
             var path: String {
                 return "/pet"
             }
@@ -114,6 +126,8 @@ public struct Endpoints {
             }
         }
         public struct Post {
+            typealias Response = Void
+
             var path: String {
                 return "/pet"
             }
@@ -132,6 +146,8 @@ public struct Endpoints {
 
     public struct Store_Inventory {
         public struct Get {
+            typealias Response = Void
+
             var path: String {
                 return "/store/inventory"
             }
@@ -147,6 +163,8 @@ public struct Endpoints {
 
     public struct User_{username} {
         public struct Put {
+            typealias Response = Void
+
             var path: String {
                 return "/user/{username}"
             }
@@ -165,6 +183,8 @@ public struct Endpoints {
             }
         }
         public struct Get {
+            typealias Response = User
+
             var path: String {
                 return "/user/{username}"
             }
@@ -180,6 +200,8 @@ public struct Endpoints {
             }
         }
         public struct Delete {
+            typealias Response = Void
+
             var path: String {
                 return "/user/{username}"
             }
@@ -198,6 +220,8 @@ public struct Endpoints {
 
     public struct User_Login {
         public struct Get {
+            typealias Response = Void
+
             var path: String {
                 return "/user/login"
             }
@@ -219,6 +243,8 @@ public struct Endpoints {
 
     public struct Store_Order_{orderId} {
         public struct Get {
+            typealias Response = Order
+
             var path: String {
                 return "/store/order/{orderId}"
             }
@@ -234,6 +260,8 @@ public struct Endpoints {
             }
         }
         public struct Delete {
+            typealias Response = Void
+
             var path: String {
                 return "/store/order/{orderId}"
             }
@@ -252,6 +280,8 @@ public struct Endpoints {
 
     public struct Pet_FindByStatus {
         public struct Get {
+            typealias Response = Array<Pet>
+
             var path: String {
                 return "/pet/findByStatus"
             }
@@ -270,6 +300,8 @@ public struct Endpoints {
 
     public struct User_Logout {
         public struct Get {
+            typealias Response = Void
+
             var path: String {
                 return "/user/logout"
             }
@@ -285,6 +317,8 @@ public struct Endpoints {
 
     public struct User_CreateWithList {
         public struct Post {
+            typealias Response = Void
+
             var path: String {
                 return "/user/createWithList"
             }
@@ -303,6 +337,8 @@ public struct Endpoints {
 
     public struct User {
         public struct Post {
+            typealias Response = Void
+
             var path: String {
                 return "/user"
             }
@@ -321,6 +357,8 @@ public struct Endpoints {
 
     public struct Pet_{petId}_UploadImage {
         public struct Post {
+            typealias Response = ApiResponse
+
             var path: String {
                 return "/pet/{petId}/uploadImage"
             }
@@ -345,6 +383,8 @@ public struct Endpoints {
 
     public struct Pet_FindByTags {
         public struct Get {
+            typealias Response = Array<Pet>
+
             var path: String {
                 return "/pet/findByTags"
             }
