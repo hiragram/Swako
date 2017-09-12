@@ -458,9 +458,9 @@ public struct Endpoints {
 
             private let petId: Int // ID of pet to update
             private let additionalMetadata: String // Additional data to pass to server
-            private let file: File is not supported // file to upload
+            private let file: Data // file to upload
 
-            public init(petId: Int, additionalMetadata: String, file: File is not supported) {
+            public init(petId: Int, additionalMetadata: String, file: Data) {
                 self.petId = petId
                 self.additionalMetadata = additionalMetadata
                 self.file = file

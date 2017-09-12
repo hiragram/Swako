@@ -49,7 +49,7 @@ def typeNameString(typeName):
     elif typeName == "array":
         return None
     elif typeName == "file":
-        return "File is not supported"
+        return "Data"
     elif typeName == None:
         return None
     else:
