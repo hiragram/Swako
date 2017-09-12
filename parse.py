@@ -77,8 +77,6 @@ class Response:
                     self.itemType = document["schema"]["items"]["type"]
                 else:
                     self.itemType = None
-        else:
-            return None
 
 class ModelDefinition:
     def __init__(self, name, document):

@@ -12,14 +12,16 @@ public struct Endpoints {
                 return "/user/createWithArray"
             }
 
-            public init(body: Array<User>) {
+            private let body: [User]
+
+            public init(body: [User]) {
                 self.body = body
             }
-
-            private let body: Array<User>
             
             var parameters: [String: Any] {
-                "body": body,
+                return [
+                    "body": body,
+                ]
             }
         }
     }
@@ -32,77 +34,85 @@ public struct Endpoints {
                 return "/store/order"
             }
 
+            private let body: Order
+
             public init(body: Order) {
                 self.body = body
             }
-
-            private let body: Order
             
             var parameters: [String: Any] {
-                "body": body,
+                return [
+                    "body": body,
+                ]
             }
         }
     }
 
-    public struct Pet_{petId} {
+    public struct Pet_PetId {
         public struct Post {
             typealias Response = Void
 
             var path: String {
-                return "/pet/{petId}"
+                return "/pet/\(petId)"
             }
+
+            private let petId: Int
+            private let name: String
+            private let status: String
 
             public init(petId: Int, name: String, status: String) {
                 self.petId = petId
                 self.name = name
                 self.status = status
             }
-
-            private let petId: Int
-            private let name: String
-            private let status: String
             
             var parameters: [String: Any] {
-                "petId": petId,
-                "name": name,
-                "status": status,
+                return [
+                    "petId": petId,
+                    "name": name,
+                    "status": status,
+                ]
             }
         }
         public struct Get {
             typealias Response = Pet
 
             var path: String {
-                return "/pet/{petId}"
+                return "/pet/\(petId)"
             }
+
+            private let petId: Int
 
             public init(petId: Int) {
                 self.petId = petId
             }
-
-            private let petId: Int
             
             var parameters: [String: Any] {
-                "petId": petId,
+                return [
+                    "petId": petId,
+                ]
             }
         }
         public struct Delete {
             typealias Response = Void
 
             var path: String {
-                return "/pet/{petId}"
+                return "/pet/\(petId)"
             }
+
+            private let api_key: String
+            private let petId: Int
 
             public init(api_key: String, petId: Int) {
                 self.api_key = api_key
                 self.petId = petId
             }
-
-            private let api_key: String
-            private let petId: Int
             
             var parameters: [String: Any] {
-                "api_key": api_key,
-                "petId": petId,
+                return [
+                    "api_key": api_key,
+                    "petId": petId,
+                ]
             }
         }
     }
@@ -115,14 +125,16 @@ public struct Endpoints {
                 return "/pet"
             }
 
+            private let body: Pet
+
             public init(body: Pet) {
                 self.body = body
             }
-
-            private let body: Pet
             
             var parameters: [String: Any] {
-                "body": body,
+                return [
+                    "body": body,
+                ]
             }
         }
         public struct Post {
@@ -132,14 +144,16 @@ public struct Endpoints {
                 return "/pet"
             }
 
+            private let body: Pet
+
             public init(body: Pet) {
                 self.body = body
             }
-
-            private let body: Pet
             
             var parameters: [String: Any] {
-                "body": body,
+                return [
+                    "body": body,
+                ]
             }
         }
     }
@@ -152,68 +166,75 @@ public struct Endpoints {
                 return "/store/inventory"
             }
 
+
             public init() {
             }
-
             
             var parameters: [String: Any] {
+                return [:]
             }
         }
     }
 
-    public struct User_{username} {
+    public struct User_Username {
         public struct Put {
             typealias Response = Void
 
             var path: String {
-                return "/user/{username}"
+                return "/user/\(username)"
             }
+
+            private let username: String
+            private let body: User
 
             public init(username: String, body: User) {
                 self.username = username
                 self.body = body
             }
-
-            private let username: String
-            private let body: User
             
             var parameters: [String: Any] {
-                "username": username,
-                "body": body,
+                return [
+                    "username": username,
+                    "body": body,
+                ]
             }
         }
         public struct Get {
             typealias Response = User
 
             var path: String {
-                return "/user/{username}"
+                return "/user/\(username)"
             }
+
+            private let username: String
 
             public init(username: String) {
                 self.username = username
             }
-
-            private let username: String
             
             var parameters: [String: Any] {
-                "username": username,
+                return [
+                    "username": username,
+                ]
             }
         }
         public struct Delete {
             typealias Response = Void
 
             var path: String {
-                return "/user/{username}"
+                return "/user/\(username)"
             }
+
+            private let username: String
 
             public init(username: String) {
                 self.username = username
             }
-
-            private let username: String
             
             var parameters: [String: Any] {
-                "username": username,
+                return [
+                    "username": username,
+                ]
             }
         }
     }
@@ -226,54 +247,60 @@ public struct Endpoints {
                 return "/user/login"
             }
 
+            private let username: String
+            private let password: String
+
             public init(username: String, password: String) {
                 self.username = username
                 self.password = password
             }
-
-            private let username: String
-            private let password: String
             
             var parameters: [String: Any] {
-                "username": username,
-                "password": password,
+                return [
+                    "username": username,
+                    "password": password,
+                ]
             }
         }
     }
 
-    public struct Store_Order_{orderId} {
+    public struct Store_Order_OrderId {
         public struct Get {
             typealias Response = Order
 
             var path: String {
-                return "/store/order/{orderId}"
+                return "/store/order/\(orderId)"
             }
+
+            private let orderId: Int
 
             public init(orderId: Int) {
                 self.orderId = orderId
             }
-
-            private let orderId: Int
             
             var parameters: [String: Any] {
-                "orderId": orderId,
+                return [
+                    "orderId": orderId,
+                ]
             }
         }
         public struct Delete {
             typealias Response = Void
 
             var path: String {
-                return "/store/order/{orderId}"
+                return "/store/order/\(orderId)"
             }
+
+            private let orderId: Int
 
             public init(orderId: Int) {
                 self.orderId = orderId
             }
-
-            private let orderId: Int
             
             var parameters: [String: Any] {
-                "orderId": orderId,
+                return [
+                    "orderId": orderId,
+                ]
             }
         }
     }
@@ -286,14 +313,16 @@ public struct Endpoints {
                 return "/pet/findByStatus"
             }
 
-            public init(status: Array<String>) {
+            private let status: [String]
+
+            public init(status: [String]) {
                 self.status = status
             }
-
-            private let status: Array<String>
             
             var parameters: [String: Any] {
-                "status": status,
+                return [
+                    "status": status,
+                ]
             }
         }
     }
@@ -306,11 +335,12 @@ public struct Endpoints {
                 return "/user/logout"
             }
 
+
             public init() {
             }
-
             
             var parameters: [String: Any] {
+                return [:]
             }
         }
     }
@@ -323,14 +353,16 @@ public struct Endpoints {
                 return "/user/createWithList"
             }
 
-            public init(body: Array<User>) {
+            private let body: [User]
+
+            public init(body: [User]) {
                 self.body = body
             }
-
-            private let body: Array<User>
             
             var parameters: [String: Any] {
-                "body": body,
+                return [
+                    "body": body,
+                ]
             }
         }
     }
@@ -343,40 +375,44 @@ public struct Endpoints {
                 return "/user"
             }
 
+            private let body: User
+
             public init(body: User) {
                 self.body = body
             }
-
-            private let body: User
             
             var parameters: [String: Any] {
-                "body": body,
+                return [
+                    "body": body,
+                ]
             }
         }
     }
 
-    public struct Pet_{petId}_UploadImage {
+    public struct Pet_PetId_UploadImage {
         public struct Post {
             typealias Response = ApiResponse
 
             var path: String {
-                return "/pet/{petId}/uploadImage"
+                return "/pet/\(petId)/uploadImage"
             }
+
+            private let petId: Int
+            private let additionalMetadata: String
+            private let file: File is not supported
 
             public init(petId: Int, additionalMetadata: String, file: File is not supported) {
                 self.petId = petId
                 self.additionalMetadata = additionalMetadata
                 self.file = file
             }
-
-            private let petId: Int
-            private let additionalMetadata: String
-            private let file: File is not supported
             
             var parameters: [String: Any] {
-                "petId": petId,
-                "additionalMetadata": additionalMetadata,
-                "file": file,
+                return [
+                    "petId": petId,
+                    "additionalMetadata": additionalMetadata,
+                    "file": file,
+                ]
             }
         }
     }
@@ -389,14 +425,16 @@ public struct Endpoints {
                 return "/pet/findByTags"
             }
 
-            public init(tags: Array<String>) {
+            private let tags: [String]
+
+            public init(tags: [String]) {
                 self.tags = tags
             }
-
-            private let tags: Array<String>
             
             var parameters: [String: Any] {
-                "tags": tags,
+                return [
+                    "tags": tags,
+                ]
             }
         }
     }

@@ -7,14 +7,14 @@ def typeNameFromProperty(property):
 
     if property.type == "array":
         elementName = typeNameString(property.itemType)
-        return "Array<" + elementName + ">"
+        return "[" + elementName + "]"
 
 def typeNameFromParameter(parameter):
     typeName = ""
     
     if parameter.type == "array":
         elementName = typeNameString(parameter.itemType)
-        typeName = "Array<" + elementName + ">"
+        typeName = "[" + elementName + "]"
     else:
         typeName = typeNameString(parameter.type)
 
@@ -57,7 +57,7 @@ def typeNameString(typeName):
         return m.group(1)
 
 def endpointTypeName(endpoint):
-    pathComponents = endpoint.path.split("/")
+    pathComponents = endpoint.path.replace("{", "").replace("}", "").split("/")
 
     words = [pathComponent[0].upper() + pathComponent[1:] for pathComponent in pathComponents if pathComponent != ""]
 
@@ -69,3 +69,6 @@ def makeCamelCase(snakeCaseString):
 def makePascalCase(snakeCaseString):
     camelCase = makeCamelCase(snakeCaseString)
     return camelCase[0].upper() + camelCase[1:]
+
+def pathToPropertyInterpolation(path):
+    return path.replace("{", "\(").replace("}", ")")

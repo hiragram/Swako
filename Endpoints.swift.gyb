@@ -20,8 +20,12 @@ public struct Endpoints {
             typealias Response = ${swift.typeNameFromResponse(method.response)}
 
             var path: String {
-                return "${endpoint.path}"
+                return "${swift.pathToPropertyInterpolation(endpoint.path)}"
             }
+
+            % for parameter in method.parameters:
+            private let ${parameter.name}: ${swift.typeNameFromParameter(parameter)}
+            % end
 
             % params = ", ".join([parameter.name + ": " + swift.typeNameFromParameter(parameter) for parameter in method.parameters])
             public init(${params}) {
@@ -29,14 +33,16 @@ public struct Endpoints {
                 self.${parameter.name} = ${parameter.name}
                 % end
             }
-
-            % for parameter in method.parameters:
-            private let ${parameter.name}: ${swift.typeNameFromParameter(parameter)}
-            % end
             
             var parameters: [String: Any] {
-                % for parameter in method.parameters:
-                "${parameter.name}": ${parameter.name},
+                % if len(method.parameters) > 0:
+                return [
+                    % for parameter in method.parameters:
+                    "${parameter.name}": ${parameter.name},
+                    % end
+                ]
+                % else:
+                return [:]
                 % end
             }
         }
