@@ -9,9 +9,9 @@ function showHelp() {
 
 #############################
 
-WORKSPACE=`pwd`;
-
-echo $WORKSPACE ; exit;
+WORKSPACE=`pwd`
+cd `dirname $0`
+INSTALLEDSPACE=`pwd`
 
 if [ ! `which python2.7` ]; then
     echo "Python 2.7 is not installed. Please install and try again."
@@ -19,12 +19,12 @@ if [ ! `which python2.7` ]; then
 fi
 
 # Install gyb if not installed
-if [ ! -x ./gyb/gyb ]; then
+if [ ! -x $INSTALLEDSPACE/gyb/gyb ]; then
     echo "Attempt to download gyb from GitHub."
-    rm -rf gyb
-    mkdir gyb
-    curl "https://raw.githubusercontent.com/apple/swift/master/utils/gyb.py" -o "gyb/gyb.py"
-    curl "https://raw.githubusercontent.com/apple/swift/master/utils/gyb" -o "gyb/gyb"
+    rm -rf $INSTALLEDSPACE/gyb
+    mkdir $INSTALLEDSPACE/gyb
+    curl "https://raw.githubusercontent.com/apple/swift/master/utils/gyb.py" -o $INSTALLEDSPACE/gyb/gyb.py
+    curl "https://raw.githubusercontent.com/apple/swift/master/utils/gyb" -o $INSTALLEDSPACE/gyb/gyb
     chmod +x gyb/gyb
 fi
 
@@ -43,4 +43,8 @@ case $subcommand in
         outputName=$3
         ./gyb/gyb $WORKSPACE/$gybName -o $WORKSPACE/$outputName --line-directive=
         ;;
+    "template" )
+        cp {$INSTALLEDSPACE,$WORKSPACE}/Endpoints_sample.swift.gyb
+        cp {$INSTALLEDSPACE,$WORKSPACE}/Models_sample.swift.gyb
+        cp {$INSTALLEDSPACE,$WORKSPACE}/sample.yml
 esac
