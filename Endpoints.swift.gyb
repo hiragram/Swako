@@ -11,11 +11,9 @@ endpoints = parse.parseEndpoints("sample.yml")
 public struct Endpoints {
 
     % for endpoint in endpoints:
-    % print ("Generating endpoint definition for " + endpoint.path)
     public struct ${swift.endpointTypeName(endpoint)} {
 
         % for method in endpoint.methods:
-        % print ("\tmethod: " + method.method)
         % if method.summary != "":
         // ${method.summary}
         //
@@ -24,7 +22,6 @@ public struct Endpoints {
         // ${method.description}
         % end
         public struct ${swift.makePascalCase(method.method)} {
-            % print (endpoint.path)
             typealias Response = ${swift.typeNameFromResponse(method.response)}
 
             var path: String {
