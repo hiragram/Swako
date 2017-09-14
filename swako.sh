@@ -9,6 +9,10 @@ function showHelp() {
 
 #############################
 
+WORKSPACE=`pwd`;
+
+echo $WORKSPACE ; exit;
+
 if [ ! `which python2.7` ]; then
     echo "Python 2.7 is not installed. Please install and try again."
     exit 1
@@ -37,6 +41,6 @@ case $subcommand in
     "generate" )
         gybName=$2
         outputName=$3
-        ./gyb/gyb $gybName -o $outputName --line-directive=
+        ./gyb/gyb $WORKSPACE/$gybName -o $WORKSPACE/$outputName --line-directive=
         ;;
 esac
